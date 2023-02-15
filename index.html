@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>登录示例</title>
+    <style>
+        body {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 50px;
+            background-color: white
+        }
+
+        form {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid rgba(25, 25, 112, .5);
+            border-radius: 10px;
+            transition: transform .5s;
+            margin-top: calc(25vh - 50px);
+            box-shadow: 3px 3px 5px rgba(128, 128, 128, .5)
+        }
+
+        form:hover {
+            transform: scale(1.05)
+        }
+
+        label {
+            display: flex;
+            flex-direction: row-reverse;
+            margin-bottom: 10px;
+            align-items: center;
+            flex-wrap: nowrap
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid gray;
+            border-radius: 5px
+        }
+
+        input[type=submit] {
+            margin-top: 20px;
+            color: white;
+            background-color: #FFA500;
+            transition: transform .5s;
+            font-size: 14px;
+            width: 4em
+        }
+
+        input[type=submit]:hover {
+            transform: scale(1.2)
+        }
+
+        input[type=text],
+        input[type=password] {
+            flex: 1 1 200px;
+            min-width: 200px;
+            margin-left: 5px
+        }
+
+        span {
+            flex: 0 0 50px;
+            white-space: nowrap;
+            overflow: hidden;
+            padding-right: 5px
+        }
+
+        h1 {
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            color: #191970;
+            margin: 0;
+            margin-bottom: 20px
+        }
+
+        .toast {
+            position: fixed;
+            right: -300px;
+            top: 50px;
+            width: 300px;
+            padding: 10px;
+            border: 1px solid rgba(25, 25, 112, .5);
+            border-radius: 10px;
+            background-color: #F0F8FF;
+            color: #191970;
+            transition: right .5s, top .5s;
+            box-shadow: 3px 3px 5px rgba(128, 128, 128, .5)
+        }
+
+        .show {
+            right: 0
+        }
+
+        .hide {
+            right: -300px
+        }
+    </style>
+</head>
+
+<body>
+    <form onsubmit="login(event)" action="">
+        <h1>由 Bing AI 生成</h1><label for="username"><input type="text" id="username" name="username"
+                placeholder="请输入用户名"><span>用户名</span></label><label for="password"><input type="password" id="password"
+                name="password" placeholder="请输入密码"><span>密码</span></label><input type="submit" value="登录">
+    </form>
+    <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); color: gray; font-size: 12px;">
+        此代码完全由 Bing AI 生成，包括所有的界面样式和 JS 逻辑</div>
+    <script>var toastList = []; function login(e) { e.preventDefault(); var t = document.getElementById("username").value, n = document.getElementById("password").value; "" === t || "" === n ? showToast("用户名和密码不能为空") : t.length > 20 || n.length > 20 ? showToast("用户名和密码的最大长度为20") : t === "root" && n === "root" ? showToast("登录成功") : showToast("登录失败") } function showToast(e) { var t = document.createElement("div"); t.className = "toast", t.innerHTML = e, toastList.unshift(t), document.body.appendChild(t), setTimeout(function () { t.className = "toast show" }, 100), setTimeout(function () { t.className = "toast hide" }, 3e3), t.addEventListener("transitionend", function () { t.className === "toast hide" && (document.body.removeChild(t), toastList.splice(toastList.indexOf(t), 1), updateToastList()) }), updateToastList() } function updateToastList() { for (var e = 0; e < toastList.length; e++) { var t = toastList[e]; t.style.top = 50 + 60 * e + "px" } }</script>
+</body>
+
+</html>
